@@ -39,6 +39,20 @@
   .values-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:26px 0 30px 0;}
   .values-row span{color:var(--navy-light);font-size:.92rem;}
 
+  .parents-photo-wrap{margin:0 auto 30px auto;max-width:340px;text-align:center;}
+  .parents-photo-wrap img{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    border:4px solid var(--white);
+    outline:2px solid var(--gold);
+    border-radius:6px;
+    box-shadow:0 6px 18px rgba(11,37,69,.18);
+  }
+  .parents-photo-wrap .caption{
+    margin-top:10px;font-style:italic;color:var(--navy-light);font-size:.9rem;
+  }
+
   .btn{display:inline-block;background:var(--gold);color:var(--navy);border:none;padding:13px 30px;font-size:1rem;font-weight:600;border-radius:2px;cursor:pointer;font-family:inherit;}
   .btn:hover{background:var(--gold-light);}
   .btn.secondary{background:transparent;color:var(--navy);border:1.5px solid var(--navy);}
@@ -120,8 +134,23 @@ const VERSES = [
 ];
 const BENEFICIAIRES = ["Familles","Étudiants","Commerçants","Entreprises","Agriculteurs","Population locale","Administration publique","Associations / ONG","Employés / Salariés"];
 
+// Ajoutez ici le nom de chaque photo que vous téléversez dans le dossier "images".
+// Une photo différente sera choisie au hasard à chaque visite de la page d'accueil.
+const PARENT_PHOTOS = [
+  "images/parent1.jpg",
+  "images/parent2.jpg",
+  "images/parent3.jpg",
+  "images/parent4.jpg",
+  "images/parent5.jpg",
+  "images/parent6.jpg",
+  "images/parent7.jpg",
+  "images/parent8.jpg",
+  "images/parent9.jpg"
+];
+
 let VIEW = "home";
 let currentVerse = VERSES[Math.floor(Math.random()*VERSES.length)];
+let currentParentPhoto = PARENT_PHOTOS[Math.floor(Math.random()*PARENT_PHOTOS.length)];
 let formErrors = [];
 let submitting = false;
 let lastSubmission = null; // {projectName, telephone, count}
@@ -130,7 +159,10 @@ let personal = {nom:"", tel:"", email:""};
 
 function go(view){
   VIEW = view;
-  if(view==="home") currentVerse = VERSES[Math.floor(Math.random()*VERSES.length)];
+  if(view==="home"){
+    currentVerse = VERSES[Math.floor(Math.random()*VERSES.length)];
+    currentParentPhoto = PARENT_PHOTOS[Math.floor(Math.random()*PARENT_PHOTOS.length)];
+  }
   render();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -149,6 +181,12 @@ function renderHome(){
     <div class="eyebrow-panel">Appel à projets</div>
     <h1>Bienvenue dans Vision & Réussite</h1>
     <p class="sub">Chaque grande réalisation commence par une idée. Nous croyons que chacun possède des talents, des compétences et une vision capables de créer de la valeur pour sa famille, sa communauté et son environnement professionnel.</p>
+
+    <div class="parents-photo-wrap">
+      <img src="${currentParentPhoto}" alt="Nos parents, source d'inspiration">
+      <div class="caption">Papa & Maman — notre source d'inspiration</div>
+    </div>
+
     <div class="verse-card">
       <div class="verse-text">« ${currentVerse.text} »</div>
       <div class="verse-ref">${currentVerse.ref}</div>
