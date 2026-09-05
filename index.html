@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision & Réussite</title>
+<style>
+  :root{
+    --navy:#0B2545; --navy-light:#163A6B; --gold:#C9A227; --gold-light:#E8C766;
+    --green:#2E7D32; --cream:#F7F5EF; --ink:#1B2430; --line:#DCD6C7; --white:#FFFFFF; --danger:#8C2F2F;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;color:var(--navy);margin:0 0 .4em 0;font-weight:normal;}
+  h1{font-size:2.4rem;} h2{font-size:1.6rem;} h3{font-size:1.2rem;}
+  p{margin:0 0 1em 0;}
+  .wrap{max-width:840px;margin:0 auto;padding:0 24px;}
+  .rule{width:64px;height:3px;background:var(--gold);border:none;margin:14px 0 22px 0;}
+
+  nav{background:var(--navy);border-bottom:3px solid var(--gold);}
+  nav .wrap{max-width:1000px;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;flex-wrap:wrap;gap:10px;}
+  .brand{color:var(--white);font-family:Georgia,serif;font-size:1.25rem;}
+  .brand b{color:var(--gold-light);}
+  .navlinks{display:flex;gap:6px;flex-wrap:wrap;}
+  .navlinks button{background:transparent;border:1px solid transparent;color:#E6E9EF;padding:8px 14px;border-radius:2px;cursor:pointer;font-size:.92rem;font-family:inherit;}
+  .navlinks button:hover{border-color:var(--gold);color:var(--gold-light);}
+  .navlinks button.active{background:var(--gold);color:var(--navy);font-weight:600;border-color:var(--gold);}
+
+  main{max-width:1000px;margin:0 auto;padding:44px 24px 90px 24px;}
+
+  .hero{text-align:center;padding:56px 0 40px 0;border-bottom:1px solid var(--line);margin-bottom:36px;}
+  .hero .eyebrow-panel{display:inline-block;background:var(--navy);color:var(--gold-light);padding:6px 16px;font-size:.85rem;letter-spacing:.5px;border-radius:2px;margin-bottom:18px;}
+  .hero h1{font-size:2.7rem;max-width:600px;margin:0 auto 6px auto;}
+  .hero .sub{color:var(--navy-light);font-size:1.05rem;max-width:560px;margin:0 auto 26px auto;}
+  .verse-card{max-width:560px;margin:0 auto 30px auto;background:var(--white);border-left:4px solid var(--green);border:1px solid var(--line);border-left:4px solid var(--green);padding:22px 26px;text-align:left;}
+  .verse-card .verse-text{font-style:italic;color:var(--navy);font-size:1.05rem;margin-bottom:6px;}
+  .verse-card .verse-ref{color:var(--green);font-size:.9rem;}
+  .values-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:26px 0 30px 0;}
+  .values-row span{color:var(--navy-light);font-size:.92rem;}
+
+  .btn{display:inline-block;background:var(--gold);color:var(--navy);border:none;padding:13px 30px;font-size:1rem;font-weight:600;border-radius:2px;cursor:pointer;font-family:inherit;}
+  .btn:hover{background:var(--gold-light);}
+  .btn.secondary{background:transparent;color:var(--navy);border:1.5px solid var(--navy);}
+  .btn.secondary:hover{background:var(--navy);color:var(--white);}
+  .btn:disabled{opacity:.5;cursor:not-allowed;}
+
+  .mission-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px;margin:30px 0 10px 0;}
+  .mission-grid .item{border-top:2px solid var(--gold);padding-top:12px;}
+  .mission-grid .item p{font-size:.92rem;color:var(--navy-light);margin:0;}
+
+  fieldset{border:1px solid var(--line);border-radius:2px;padding:22px 24px;margin:0 0 22px 0;background:var(--white);}
+  legend{padding:0 10px;color:var(--navy);font-family:Georgia,serif;font-size:1.1rem;}
+  label{display:block;font-size:.9rem;color:var(--navy);margin:14px 0 6px 0;font-weight:600;}
+  label .req{color:var(--danger);}
+  label .hint{display:block;font-weight:400;color:#6b7280;font-size:.82rem;margin-top:2px;}
+  input[type=text],input[type=tel],input[type=email],textarea,select{width:100%;padding:11px 12px;border:1px solid #C9C3B2;border-radius:2px;font-family:inherit;font-size:.95rem;background:var(--white);color:var(--ink);}
+  input:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold);}
+  textarea{resize:vertical;min-height:78px;}
+  .checks{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:6px;}
+  .checks label{display:flex;align-items:center;gap:8px;font-weight:400;margin:0;font-size:.92rem;color:var(--ink);}
+  .checks input{width:auto;}
+  .radios{display:flex;flex-wrap:wrap;gap:16px;margin-top:6px;}
+  .radios label{display:flex;align-items:center;gap:8px;font-weight:400;margin:0;font-size:.92rem;color:var(--ink);}
+  .radios input{width:auto;}
+  .error-box{background:#FBEAEA;border:1px solid var(--danger);color:var(--danger);padding:12px 16px;border-radius:2px;margin-bottom:18px;font-size:.9rem;}
+  .actions-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;}
+
+  .confirm-card{background:var(--white);border:1px solid var(--line);border-top:4px solid var(--green);padding:36px 30px;text-align:center;}
+  .confirm-card .check{font-size:2.4rem;color:var(--green);margin-bottom:8px;}
+
+  .info-card{background:var(--white);border:1px solid var(--line);border-top:4px solid var(--navy);padding:30px;text-align:center;max-width:520px;margin:40px auto;}
+
+  footer{text-align:center;padding:28px 24px;color:#8a8474;font-size:.85rem;border-top:1px solid var(--line);}
+  .spinner-note{color:#6b7280;font-size:.9rem;}
+
+  @media(max-width:640px){
+    .hero h1{font-size:1.9rem;} .hero{padding:40px 0 30px 0;}
+    main{padding:28px 16px 70px 16px;}
+    nav .wrap{padding:12px 16px;}
+    .brand{font-size:1.05rem;}
+    .navlinks button{padding:7px 10px;font-size:.82rem;}
+    fieldset{padding:16px 16px;}
+    .actions-row{flex-direction:column;align-items:stretch;}
+    .actions-row .btn{width:100%;text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Vision <b>&</b> Réussite</div>
+    <div class="navlinks" id="navlinks">
+      <button data-view="home">Accueil</button>
+      <button data-view="submit">Soumettre un projet</button>
+      <button id="adminBtn">Espace Administrateur</button>
+    </div>
+  </div>
+</nav>
+
+<main id="app"></main>
+
+<footer>Une idée peut changer un avenir. Une vision peut devenir une réussite.</footer>
+
+<script>
+/* ======================= À CONFIGURER PAR VOUS ======================= */
+// 1) Collez ici le lien "Web app" copié depuis Google Apps Script (étape 7)
+const SCRIPT_URL = "COLLEZ_ICI_VOTRE_LIEN_APPS_SCRIPT";
+// 2) Collez ici le lien de partage de votre Google Sheet (bouton "Partager" dans Google Sheets)
+const ADMIN_SHEET_URL = "COLLEZ_ICI_LE_LIEN_DE_PARTAGE_DE_VOTRE_GOOGLE_SHEET";
+/* ======================================================================= */
+
+const VERSES = [
+  {text:"Confie au Seigneur tes œuvres, et tes projets réussiront.", ref:"Proverbes 16,3"},
+  {text:"Tout ce que votre main trouve à faire, faites-le avec toute votre force.", ref:"Ecclésiaste 9,10"},
+  {text:"C'est la bénédiction du Seigneur qui enrichit.", ref:"Proverbes 10,22"},
+  {text:"Demandez et l'on vous donnera ; cherchez et vous trouverez.", ref:"Matthieu 7,7"},
+  {text:"Car je connais les projets que j'ai formés sur vous, projets de paix et non de malheur.", ref:"Jérémie 29,11"}
+];
+const BENEFICIAIRES = ["Familles","Étudiants","Commerçants","Entreprises","Agriculteurs","Population locale","Administration publique","Associations / ONG","Employés / Salariés"];
+
+let VIEW = "home";
+let currentVerse = VERSES[Math.floor(Math.random()*VERSES.length)];
+let formErrors = [];
+let submitting = false;
+let lastSubmission = null; // {projectName, telephone, count}
+let projectDraft = {beneficiaires:[], niveauRentabilite:"", lancement:""};
+let personal = {nom:"", tel:"", email:""};
+
+function go(view){
+  VIEW = view;
+  if(view==="home") currentVerse = VERSES[Math.floor(Math.random()*VERSES.length)];
+  render();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.getElementById("navlinks").addEventListener("click",(e)=>{
+  const btn = e.target.closest("button[data-view]");
+  if(btn) go(btn.dataset.view);
+});
+document.getElementById("adminBtn").addEventListener("click",()=>{
+  if(ADMIN_SHEET_URL.startsWith("http")) window.open(ADMIN_SHEET_URL, "_blank");
+  else alert("Le lien vers la feuille Google Sheets n'a pas encore été configuré dans le fichier.");
+});
+
+function renderHome(){
+  return `
+  <section class="hero">
+    <div class="eyebrow-panel">Appel à projets</div>
+    <h1>Bienvenue dans Vision & Réussite</h1>
+    <p class="sub">Chaque grande réalisation commence par une idée. Nous croyons que chacun possède des talents, des compétences et une vision capables de créer de la valeur pour sa famille, sa communauté et son environnement professionnel.</p>
+    <div class="verse-card">
+      <div class="verse-text">« ${currentVerse.text} »</div>
+      <div class="verse-ref">${currentVerse.ref}</div>
+    </div>
+    <p class="sub">Prenez quelques minutes pour présenter votre projet. Votre idée pourrait devenir une opportunité de développement, d'emploi, d'innovation ou de création de richesse.</p>
+    <button class="btn" onclick="go('submit')">Soumettre mon projet</button>
+    <div class="values-row">
+      <span>✅ Réussite</span><span>✅ Innovation</span><span>✅ Foi</span>
+      <span>✅ Travail</span><span>✅ Prospérité</span><span>✅ Développement personnel et familial</span>
+    </div>
+  </section>
+  <section>
+    <h2>Notre démarche</h2><hr class="rule">
+    <div class="mission-grid">
+      <div class="item"><h3>Identifier</h3><p>Repérer les projets à fort potentiel parmi toutes les idées reçues.</p></div>
+      <div class="item"><h3>Encourager</h3><p>Stimuler l'esprit entrepreneurial de chaque participant.</p></div>
+      <div class="item"><h3>Détecter</h3><p>Faire ressortir les projets les plus rentables.</p></div>
+      <div class="item"><h3>Centraliser</h3><p>Rassembler toutes les idées dans une base unique.</p></div>
+      <div class="item"><h3>Analyser</h3><p>Faciliter l'étude et la prise de décision.</p></div>
+    </div>
+  </section>`;
+}
+
+function collectBeneficiaires(){
+  const list = Array.from(document.querySelectorAll('input[name="beneficiaire"]:checked')).map(el=>el.value);
+  const autreChecked = document.getElementById("benAutreCheck")?.checked;
+  const autreTexte = document.getElementById("benAutreTexte")?.value.trim();
+  if(autreChecked && autreTexte) list.push("Autres : "+autreTexte);
+  return list;
+}
+
+function renderSubmit(){
+  if(lastSubmission) return renderConfirmation();
+
+  const beneficiaireChecks = BENEFICIAIRES.map(b=>`
+    <label><input type="checkbox" name="beneficiaire" value="${b}" ${projectDraft.beneficiaires.includes(b)?"checked":""}> ${b}</label>
+  `).join("") + `<label><input type="checkbox" id="benAutreCheck"> Autres :
+      <input type="text" id="benAutreTexte" style="width:160px;margin-left:6px;display:inline-block" placeholder="préciser"></label>`;
+
+  return `
+  <section>
+    <h2>Soumettre un projet</h2><hr class="rule">
+    <p style="color:#6b7280;font-size:.92rem;">Chaque participant peut soumettre jusqu'à 3 projets maximum avec le même numéro de téléphone.</p>
+    ${formErrors.length ? `<div class="error-box"><strong>Merci de corriger les points suivants :</strong><ul style="margin:8px 0 0 18px;padding:0;">${formErrors.map(e=>`<li>${e}</li>`).join("")}</ul></div>` : ""}
+
+    <form id="projectForm">
+      <fieldset>
+        <legend>Informations personnelles</legend>
+        <label>Nom et prénom <span class="req">*</span></label>
+        <input type="text" id="f_nom" value="${personal.nom}" placeholder="Ex : Awa Koné">
+        <label>Téléphone <span class="req">*</span></label>
+        <input type="tel" id="f_tel" value="${personal.tel}" placeholder="Ex : 07 00 00 00 00">
+        <label>Adresse e-mail (facultatif)<span class="hint">Recommandé pour faciliter les échanges.</span></label>
+        <input type="email" id="f_email" value="${personal.email}" placeholder="exemple@mail.com">
+      </fieldset>
+
+      <fieldset>
+        <legend>Présentation du projet</legend>
+        <label>Nom du projet <span class="req">*</span><span class="hint">Ex : Marché Agricole Connecté</span></label>
+        <input type="text" id="f_projname" placeholder="Nom du projet">
+        <label>Présentation de votre idée <span class="req">*</span><span class="hint">2 ou 3 phrases maximum.</span></label>
+        <textarea id="f_idea" placeholder="Décrivez votre idée"></textarea>
+        <label>Quel problème votre projet cherche-t-il à résoudre ? <span class="req">*</span></label>
+        <textarea id="f_probleme" placeholder="Décrivez le problème"></textarea>
+        <label>Qui sont les clients ou bénéficiaires ?<span class="hint">Plusieurs choix possibles.</span></label>
+        <div class="checks">${beneficiaireChecks}</div>
+        <label>Comment votre projet créera-t-il de la valeur ?</label>
+        <textarea id="f_valeur" placeholder="Revenus, coûts, temps, service..."></textarea>
+        <label>Niveau de rentabilité estimé</label>
+        <div class="radios">${["Faible","Moyen","Élevé"].map(n=>`<label><input type="radio" name="rentabilite" value="${n}"> ${n}</label>`).join("")}</div>
+        <label>Pourquoi votre projet mérite-t-il d'être retenu ?</label>
+        <textarea id="f_raison" placeholder="Votre meilleur argument"></textarea>
+        <label>Si vous disposiez aujourd'hui des ressources nécessaires, lanceriez-vous ce projet ?</label>
+        <div class="radios">${["Oui immédiatement","Oui après une étude complémentaire","Je ne suis pas encore certain"].map(n=>`<label><input type="radio" name="lancement" value="${n}"> ${n}</label>`).join("")}</div>
+      </fieldset>
+
+      <div class="actions-row">
+        <button type="button" class="btn" id="submitBtn" onclick="handleSubmitProject()" ${submitting?"disabled":""}>${submitting?"Envoi en cours…":"Soumettre le projet"}</button>
+        <button type="button" class="btn secondary" onclick="go('home')">Annuler</button>
+      </div>
+      ${submitting ? `<p class="spinner-note">Merci de patienter quelques secondes…</p>` : ""}
+    </form>
+  </section>`;
+}
+
+async function handleSubmitProject(){
+  if(!SCRIPT_URL.startsWith("http")){
+    alert("Le lien Google Apps Script n'a pas encore été configuré dans le fichier. Voir la ligne SCRIPT_URL en haut du script.");
+    return;
+  }
+  const nom = document.getElementById("f_nom").value.trim();
+  const tel = document.getElementById("f_tel").value.trim();
+  const email = document.getElementById("f_email").value.trim();
+  const projname = document.getElementById("f_projname").value.trim();
+  const idea = document.getElementById("f_idea").value.trim();
+  const probleme = document.getElementById("f_probleme").value.trim();
+  const valeur = document.getElementById("f_valeur").value.trim();
+  const raison = document.getElementById("f_raison").value.trim();
+  const rentabilite = document.querySelector('input[name="rentabilite"]:checked')?.value || "";
+  const lancement = document.querySelector('input[name="lancement"]:checked')?.value || "";
+  const beneficiaires = collectBeneficiaires();
+
+  formErrors = [];
+  if(!nom) formErrors.push("Le nom et prénom sont obligatoires.");
+  if(!tel) formErrors.push("Le numéro de téléphone est obligatoire.");
+  if(!projname) formErrors.push("Le nom du projet est obligatoire.");
+  if(!idea) formErrors.push("La présentation de l'idée est obligatoire.");
+  if(!probleme) formErrors.push("La description du problème est obligatoire.");
+  if(formErrors.length){ render(); window.scrollTo({top:0,behavior:"smooth"}); return; }
+
+  personal = {nom, tel, email};
+  submitting = true;
+  render();
+
+  try{
+    const res = await fetch(SCRIPT_URL, {
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify({nom, telephone:tel, email, projectName:projname, idea, probleme, beneficiaires, valeur, niveauRentabilite:rentabilite, raison, lancement})
+    });
+    const data = await res.json();
+    submitting = false;
+    if(!data.success){
+      formErrors = [data.message || "Une erreur est survenue, merci de réessayer."];
+      render();
+      return;
+    }
+    lastSubmission = {projectName: projname, telephone: tel, count: data.count || 1};
+    currentVerse = VERSES[Math.floor(Math.random()*VERSES.length)];
+    projectDraft = {beneficiaires:[], niveauRentabilite:"", lancement:""};
+    render();
+    window.scrollTo({top:0,behavior:"smooth"});
+  }catch(err){
+    submitting = false;
+    formErrors = ["Impossible de contacter le serveur. Vérifiez votre connexion internet et réessayez."];
+    render();
+  }
+}
+
+function renderConfirmation(){
+  const canAddMore = lastSubmission.count < 3;
+  return `
+  <section>
+    <div class="confirm-card">
+      <div class="check">✔</div>
+      <h2>Merci pour votre participation</h2>
+      <p>Votre projet <strong>« ${lastSubmission.projectName} »</strong> a été enregistré avec succès dans la plateforme Vision & Réussite.</p>
+      <p style="max-width:520px;margin:0 auto 18px auto;color:#4b5563;">Toutes les propositions seront analysées selon leur pertinence, leur faisabilité, leur impact et leur potentiel de rentabilité. Les porteurs des projets les plus prometteurs seront conviés à une prochaine réunion de travail.</p>
+      <p style="color:#4b5563;">Nous vous remercions pour votre engagement et votre contribution à la construction d'opportunités durables.</p>
+      <div class="verse-card" style="text-align:left;">
+        <div class="verse-text">« ${currentVerse.text} »</div>
+        <div class="verse-ref">${currentVerse.ref}</div>
+      </div>
+      <div class="actions-row" style="justify-content:center;">
+        ${canAddMore ? `<button class="btn" onclick="lastSubmission=null; render();">Soumettre un autre projet (${lastSubmission.count}/3)</button>` : `<span style="color:#6b7280;font-size:.9rem;">Limite de 3 projets atteinte pour ce numéro.</span>`}
+        <button class="btn secondary" onclick="lastSubmission=null; go('home');">Retour à l'accueil</button>
+      </div>
+    </div>
+  </section>`;
+}
+
+function renderInto(){
+  const app = document.getElementById("app");
+  if(VIEW==="home") app.innerHTML = renderHome();
+  else if(VIEW==="submit") app.innerHTML = renderSubmit();
+  document.querySelectorAll("#navlinks button[data-view]").forEach(b=>{
+    b.classList.toggle("active", b.dataset.view===VIEW);
+  });
+}
+function render(){ renderInto(); }
+render();
+</script>
+</body>
+</html>
